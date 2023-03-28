@@ -16,15 +16,15 @@ print(s.pop())
 
 # or we can use linked list but we have to traverse to the end
 
-
+#######################################################
 # In python we use collection.deque for stack
 from collections import deque
-stack = deque()
-stack.append("deque - first")
-stack.append("deque - second")
-stack.append("12345")
+# stack = deque()
+# stack.append("deque - first")
+# stack.append("deque - second")
+# stack.append("12345")
 
-print(stack)
+# print(stack)
 
 
 
@@ -52,15 +52,38 @@ class Stack():
     # pusshing and popping is O(1)
     # seraching an element is O(n)
 
-stack = Stack()
-stack.push("A")
-stack.push("B")
-stack.push("C")
-stack.push("D")
 
-print("Peek: ", stack.peek())
-print("Is_empty: ", stack.is_empty())
-print("Size: ", stack.size())
-print("Pop: ",stack.pop() )
-print("Size: ", stack.size())
-")
+def is_balanced(data):
+    '''
+    stack data structure is used to identify if brackets are closed when coding
+    '''
+    stack = Stack()
+    for char in data:
+        stack.push(char)
+    count_square = 0
+    count_curley = 0
+    count_parent = 0
+    for i in range(stack.size()):
+        value = stack.pop()
+        if value == "}":
+            count_curley += 1
+        if value == ")":
+            count_parent += 1
+        if value == "]":
+            count_square += 1
+        if value == "{":
+            count_curley -= 1
+        if value == ")":
+            count_parent -= 1
+        if value == "]":
+            count_square -= 1
+    print(count_square)
+    print(count_curley)
+    print(count_parent)
+    return not count_curley and not count_parent and not count_square
+
+
+
+data = input("Enter data with parenteses: ")
+
+print(is_balanced(data))
